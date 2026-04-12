@@ -1,0 +1,11 @@
+---
+// src/components/Wikilink.astro — renders <a> with primary color + underline decoration.
+// Used via custom remark plugin OR authors wrap links manually. v1: just a styled anchor component.
+export interface Props {
+  href: string;
+}
+const { href } = Astro.props;
+---
+<a href={href} class="text-primary underline decoration-primary/30 underline-offset-2 hover:decoration-primary">
+  <slot />
+</a>

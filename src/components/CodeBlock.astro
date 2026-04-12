@@ -1,0 +1,9 @@
+---
+// src/components/CodeBlock.astro — dark paper inline code + pre wrapper
+// Shiki already handles syntax; we wrap the <pre> with our aesthetic frame.
+---
+<div class="my-6 bg-[#1d1c16] text-[#fef9ef] text-sm rounded-lg overflow-x-auto font-mono callout-shadow">
+  <div class="px-6 py-4">
+    <slot />
+  </div>
+</div>
