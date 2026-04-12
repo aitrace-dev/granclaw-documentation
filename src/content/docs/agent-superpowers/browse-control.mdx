@@ -1,0 +1,35 @@
+---
+title: Browse control
+description: Take over the browser from your agent.
+section: agent-superpowers
+tags: [browser, control]
+backlinks: [agent-superpowers/watch-and-replay-sessions, agent-superpowers/browser-profiles]
+---
+
+import Callout from '../../../components/Callout.astro';
+
+While the agent is browsing, you can take over at any time — move the mouse, click, type — then hand control back and let the agent continue.
+
+## Taking control
+
+Open the live browser panel while the agent has an active session. Click **Take control**. The agent pauses and the browser is yours. Navigate, fill in a form, handle a CAPTCHA, complete a 2FA step — anything a normal browser would let you do.
+
+When you're done, click **Release control**. The agent resumes from the current page state.
+
+<Callout type="tip">
+This is the right way to handle 2FA and CAPTCHAs on a first login. Take control, complete the step, release — the profile saves the authenticated session for every future run.
+</Callout>
+
+## What the agent sees after handoff
+
+The agent picks up from wherever you left the browser. If you navigated to a new page, it continues from there. If you filled in a form, the form is already filled. The agent doesn't know you intervened — it just sees the current page.
+
+## Simultaneous control
+
+Only one party controls the browser at a time. When you hold control, the agent is paused and won't issue any browser commands. Releasing control gives it back completely.
+
+<Callout type="warning">
+Don't leave the browser in "take control" mode unattended — the agent is paused and won't run scheduled actions or respond to messages while you hold the session.
+</Callout>
+
+**Next:** [Telegram integration](/agent-superpowers/telegram-integration)

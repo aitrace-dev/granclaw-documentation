@@ -40,6 +40,7 @@ export const sidebar: SidebarSection[] = [
     items: [
       { slug: 'agent-superpowers/browser-profiles',                 title: 'browser-profiles.md',  icon: 'public' },
       { slug: 'agent-superpowers/watch-and-replay-sessions',        title: 'watch-replay.md',      icon: 'movie' },
+      { slug: 'agent-superpowers/browse-control',                  title: 'browse-control.md',    icon: 'open_in_browser' },
       { slug: 'agent-superpowers/telegram-integration',             title: 'telegram.md',          icon: 'send' },
       { slug: 'agent-superpowers/vault-obsidian-memory',            title: 'vault.md',             icon: 'menu_book' },
       { slug: 'agent-superpowers/mcp-tools-and-capability-approval',title: 'mcp-tools.md',         icon: 'extension' },

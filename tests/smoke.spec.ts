@@ -6,11 +6,11 @@ test('index redirects to introduction', async ({ page }) => {
   await expect(page.locator('main h1')).toContainText('Introduction');
 });
 
-test('sidebar renders all 20 pages', async ({ page }) => {
+test('sidebar renders all 21 pages', async ({ page }) => {
   await page.goto('/getting-started/introduction');
   // Use the fixed sidebar (left sidebar) specifically, not the TOC sidebar
   const links = page.locator('aside.fixed nav a');
-  await expect(links).toHaveCount(20);
+  await expect(links).toHaveCount(21);
 });
 
 test('active page is highlighted in sidebar', async ({ page }) => {
