@@ -19,5 +19,8 @@ export default defineConfig({
         external: [/^\/_?pagefind\//],
       },
     },
+    optimizeDeps: {
+      exclude: ['pagefind'],
+    },
   },
 });

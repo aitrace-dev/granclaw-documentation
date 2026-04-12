@@ -25,8 +25,9 @@
 
   async function ensurePagefind() {
     if (pagefind) return pagefind;
-    // @ts-ignore - Pagefind is emitted at build time, not available in dev unless built.
-    pagefind = await import(/* @vite-ignore */ '/pagefind/pagefind.js').catch(() => null);
+    // Use new Function to prevent Vite from statically analysing the import path.
+    // Pagefind only exists after `npm run build` — in dev this resolves to null gracefully.
+    pagefind = await (new Function("return import('/pagefind/pagefind.js')")()).catch(() => null);
     return pagefind;
   }
 
