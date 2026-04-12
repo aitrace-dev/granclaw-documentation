@@ -26,7 +26,7 @@
   async function ensurePagefind() {
     if (pagefind) return pagefind;
     // @ts-ignore - Pagefind is emitted at build time, not available in dev unless built.
-    pagefind = await import(/* @vite-ignore */ '/_pagefind/pagefind.js').catch(() => null);
+    pagefind = await import(/* @vite-ignore */ '/pagefind/pagefind.js').catch(() => null);
     return pagefind;
   }
 
