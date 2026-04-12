@@ -8,46 +8,28 @@ backlinks: [agent-superpowers/browser-profiles, data-and-privacy/export-and-impo
 
 import Callout from '../../../components/Callout.astro';
 
-Close the tab. Come back tomorrow. The agent remembers.
+Close the browser, shut down your machine, restart GranClaw — your agent picks up exactly where you left off.
 
-This is easy to underestimate until you actually depend on it. You can close the browser, shut down your machine, restart GranClaw after an update, and come back hours or days later — your agent picks up exactly where you left off. The conversation is there. The context is there. Your agent knows who you are and what you were working on.
+## What persists
 
-## Conversation memory
+- Conversation history — every message, in order
+- Vault — all markdown notes the agent has written
+- Browser logins — cookies and saved sessions in the agent's Chrome profile
+- Mission Control — every kanban card in its current state
+- Schedules — fire on time even when you're not looking
 
-When you send a message, GranClaw assigns the exchange a session ID and stores it locally in a database on your machine. The next time you open that agent and send a message, GranClaw resumes the same session automatically. The agent has full access to everything you discussed — it doesn't start from a blank slate, it continues from the last line of your last conversation.
-
-This isn't a prompt you have to write. You don't need to paste summaries or re-explain your project. You just type, and the agent already knows.
-
-Memory survives: server restarts, GranClaw updates, browser refreshes, machine reboots. The only way to reset it is to explicitly wipe the agent from the Danger Zone in agent settings — an action that requires deliberate confirmation, exactly because it can't be undone.
+The only thing that doesn't survive is an open live browser stream — reopen the panel to reconnect.
 
 ## Browser session reuse
 
-Every agent that has browser access gets its own dedicated Chrome profile — a persistent set of cookies, saved passwords, and site preferences that stay between sessions. Log in to LinkedIn, Gmail, Notion, or any internal tool once, and the agent's browser profile saves that login for every future session.
-
-The next time you ask the agent to interact with that site, it opens a Chrome window already authenticated. No CAPTCHA loops. No re-entering passwords. No hunting for an API key on a service that doesn't have one.
+Each agent has its own Chrome profile. Log in to LinkedIn, Gmail, or any site once and the agent reuses that session forever — no CAPTCHA loops, no re-authentication.
 
 <Callout type="tip">
-Each agent has its own Chrome profile. They cannot see each other's cookies, saved logins, or browsing history. An agent you configure for LinkedIn will never accidentally touch the sessions belonging to a different agent configured for Gmail. The isolation is complete.
+Profiles are completely isolated. One agent's logins are invisible to every other agent.
 </Callout>
 
-## What survives a restart
+## Backup and portability
 
-Here is the full list of what GranClaw preserves across a restart, an update, or a machine reboot:
-
-- **Conversation history** — every message you and the agent have exchanged, in order.
-- **Agent memory** — everything the agent has written to its vault: daily journals, action logs, research notes, wikilinks between ideas.
-- **Browser logins** — all cookies and saved sessions in the agent's Chrome profile.
-- **Mission Control tasks** — every card on the kanban board, in its current state.
-- **Schedules** — every recurring task you have configured. They fire on time, even if you weren't looking at the dashboard.
-
-The only exception is an active browser streaming view — if you were watching the agent browse live, you'll need to re-open that panel. Everything else is exactly as you left it.
-
-## Agent backup and portability
-
-One-click export downloads a zip of the agent's complete state: vault, databases, browser profile, and configuration.
-
-Drop that zip onto another machine, import it, and the agent comes back online with the same identity, the same memory, and the same logins. Move it from your laptop to a server, or share it with a colleague — no manual re-setup. The zip is self-contained.
-
-Backups are also the right answer before experimenting. Export first. If something goes wrong, import and you are back where you started. This is what "your data, on your machine" means in practice: you can hold it in your hands, move it, and restore it — without asking anyone's permission.
+Export any agent to a zip: vault, history, browser profile, config, task board — everything. Import on another machine and the same agent comes back online, memory intact.
 
 **Next:** [Mission Control](/using-granclaw/mission-control)

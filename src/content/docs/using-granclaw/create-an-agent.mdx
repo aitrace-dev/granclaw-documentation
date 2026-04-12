@@ -8,43 +8,22 @@ backlinks: [using-granclaw/chat]
 
 import Callout from '../../../components/Callout.astro';
 
-One JSON entry, one refresh, new agent.
+Click **+ New Agent** in the dashboard, fill in three fields, save. The card appears immediately.
 
-## Where agents are defined
+## The three fields
 
-Every agent in GranClaw lives in a central configuration file called `agents.config.json` at the root of your installation directory. The dashboard reads this file live — you never need to restart anything for changes to take effect. Open the Agents panel in the dashboard to see the list of configured agents. Each card shows the agent's name, the model it uses, and its current status.
+- **Name** — lowercase slug: `research-agent`, `linkedin-writer`. Becomes the agent's ID.
+- **Model** — from your configured providers: `claude-sonnet-4-5`, `gpt-4o`, `gemini-2.0-flash`.
+- **Tools** — what the agent can do. Default covers filesystem and browser.
 
-You can also create agents directly from the dashboard without touching the configuration file manually. Click **+ New Agent** from the Agents panel, fill in the fields, and save. GranClaw writes the entry to `agents.config.json` for you.
-
-## The three things every agent needs
-
-When you create an agent, you are defining three things:
-
-- **Name** — a short, slug-friendly identifier like `research-agent` or `linkedin-writer`. This becomes the agent's ID. It shows up in the sidebar, in the dashboard URL, and in the exported backup filename.
-- **Model** — which LLM this agent will use. You pick from the providers you have configured in Settings. Examples: `claude-sonnet-4-5`, `gpt-4o`, `gemini-2.0-flash`. You can give different agents different models and swap them any time without restarting.
-- **Tools** — what the agent is allowed to do. The default tool set covers the filesystem workspace and the web browser. You can expand it with MCP tools later.
-
-Everything else — conversation history, vault files, scheduled tasks, browser logins — is created automatically the first time you send a message.
-
-## Creating an agent from the dashboard
-
-1. Open the dashboard and click **+ New Agent** in the top bar or Agents panel.
-2. Give it a name. Keep it lowercase, no spaces.
-3. Select a model from the dropdown. This list is populated from your configured providers in Settings. If the dropdown is empty, [add a provider first](/getting-started/configure-llm-provider).
-4. Click **Create**.
-
-The agent card appears immediately. Click it to open the chat window and send your first message.
+Everything else (history, vault, task board, schedules) is created automatically on first message.
 
 <Callout type="tip">
-Give your agents descriptive names that reflect what they do: `linkedin-writer`, `daily-briefer`, `code-reviewer`. You can have as many as you need running at the same time. Each one has its own conversation history, vault, scheduled tasks, and browser profile — they are fully isolated.
+Each agent is fully isolated — its own workspace, browser profile, and vault. Run as many as you need in parallel.
 </Callout>
 
-## Pointing at a different workspace directory
+## Custom workspace
 
-By default, each agent writes its files — vault notes, downloaded research, code it produces — into a workspace subdirectory inside GranClaw's data folder. If you want an agent to work inside a specific folder on your machine, you can configure a custom workspace directory.
-
-In the agent settings panel, click **Advanced** and enter an absolute path in the **Workspace directory** field. The next message the agent sends will use that directory as its working root. This is useful when you want an agent to operate directly inside a project folder, or when you want its vault to live somewhere you already have Obsidian open.
-
-A fresh agent starts with an onboarding template in its workspace. On the first run, it reads this template and sets itself up — choosing a persona, creating initial vault notes, and confirming it is ready. You only see this once.
+Agent settings → **Advanced** → set an absolute path. Useful when you want the agent working inside a project folder you already have open.
 
 **Next:** [Chat](/using-granclaw/chat)

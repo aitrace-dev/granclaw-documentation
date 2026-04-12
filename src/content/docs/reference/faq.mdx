@@ -8,56 +8,61 @@ backlinks: [reference/troubleshooting]
 
 import Callout from '../../../components/Callout.astro';
 
-Answers to the questions everyone asks.
-
 ## Is my data sent anywhere?
 
-The only data that leaves your machine is what you explicitly send to an LLM provider — the messages you exchange with your agents, which are forwarded to whichever API (OpenAI, Anthropic, Gemini, Groq, or OpenRouter) you configured. GranClaw itself has no telemetry, no analytics, and no backend server. Everything else — conversation history, vault files, browser profiles, task boards, secrets — stays on your hardware.
+Only LLM API calls leave your machine. No telemetry, no analytics, no GranClaw backend.
 
-## Do I need an internet connection?
+## Do I need internet?
 
-You need an internet connection for the LLM calls your agents make, because those calls go out to the provider's API. The GranClaw dashboard itself and all local data work offline. If your agent is doing a browser task that requires the web, it will need connectivity for that too. But the app itself, your history, your vault, and your settings are all local.
+For LLM calls and browser tasks, yes. The dashboard, history, vault, and settings work offline.
 
 ## Can I use GranClaw without an API key?
 
-No. GranClaw needs a connection to at least one LLM provider to work — the agent's intelligence comes from the language model, and models are served by the providers. You can install GranClaw and explore the dashboard without a key, but the agent won't be able to reply to messages until you configure one in Settings. You only need one key from one provider to get started.
+No. The agent needs an LLM to reply. You can explore the dashboard without one, but add a key in Settings before sending a message.
 
 ## Which LLM is best?
 
-It depends on what you are using the agent for. As a starting point: Claude (Anthropic) tends to perform well on writing, reasoning, and long-context tasks. GPT-4o (OpenAI) is reliable across a broad range of tasks. Gemini models work well if you are already in the Google ecosystem. Groq offers fast inference at lower cost for simpler tasks. OpenRouter is useful if you want access to many models through a single key. The best approach is to pick one, use it for a while, and switch if you find something that fits better.
+- **Claude** — writing, reasoning, long context
+- **GPT-4o** — broad general use
+- **Gemini** — Google ecosystem
+- **Groq** — fast, lower cost for simpler tasks
+- **OpenRouter** — one key, many models
+
+Pick one, try it, switch if needed.
 
 ## Can two agents share a browser profile?
 
-No. Each agent gets its own isolated Chrome profile. This is by design — it prevents one agent from accessing another agent's saved logins, cookies, or browsing history. If you need the same account accessible to multiple agents, you would need to log in on each of them separately.
+No. Each agent has its own isolated Chrome profile by design.
 
-## Where is my data stored on disk?
+## Where is my data stored?
 
-By default, everything lives in `~/.granclaw/`. Workspaces (including vault files) are in `~/.granclaw/workspaces/<agent-id>/`. Databases are in `~/.granclaw/data/`. You can override the home directory with `--home <path>` on the command line or the `GRANCLAW_HOME` environment variable.
+`~/.granclaw/` by default. Override with `--home <path>` or `GRANCLAW_HOME`.
 
-## How do I back up everything?
+- Workspaces: `~/.granclaw/workspaces/<agent-id>/`
+- Databases: `~/.granclaw/data/`
 
-Use the Export feature in the dashboard — click the export button on an agent's card to download a zip containing the vault, conversation history, browser profile, and configuration. To back up all agents, export each one separately. The zip files are self-contained and can be imported on any machine running GranClaw.
+## How do I back up?
 
-You can also back up the entire `~/.granclaw/` directory with any file backup tool you already use. Since everything is local files, standard backup strategies work fine.
+Export each agent from the dashboard (vault + history + browser profile + config in one zip). Or back up `~/.granclaw/` with any file backup tool.
 
-## Can I run GranClaw on a server?
+## Can I run it on a server?
 
-Yes. GranClaw is a Node.js process — it runs anywhere Node 20+ runs, including Linux servers. Start it the same way you would locally (`npx granclaw@beta` or `npm run dev` from a clone), and access the dashboard at the server's IP and port. You can run it headlessly; the browser sessions only matter if you are using the browser automation features, which require a display or virtual framebuffer for Chrome.
+Yes. Node.js process — runs anywhere Node 20+ runs. Browser automation needs a display or virtual framebuffer for Chrome.
 
 ## Does it work on Windows?
 
-Windows support is not yet included in this version. GranClaw currently runs on macOS and Linux. Windows support is planned for a future release.
+Not yet. macOS and Linux only. Windows support is planned.
 
 ## Is GranClaw open source?
 
-Yes. GranClaw is released under the MIT license. The source code is at [github.com/aitrace-dev/granclaw](https://github.com/aitrace-dev/granclaw). You can read it, fork it, modify it, and run your own version. No telemetry, no license checks, no features gated behind a commercial tier.
+Yes, MIT license. [github.com/aitrace-dev/granclaw](https://github.com/aitrace-dev/granclaw)
 
-## How do I uninstall it cleanly?
+## How do I uninstall?
 
-If you installed via `npx granclaw@beta`, there is nothing to uninstall from the system — npx doesn't leave a persistent install. Delete `~/.granclaw/` (or your custom `GRANCLAW_HOME` directory) to remove all data. If you cloned the repository, delete the clone directory as well. That's the complete removal — no system-level cleanup required.
+Delete `~/.granclaw/` (or your `GRANCLAW_HOME`). Nothing else to remove — `npx` doesn't leave a persistent install.
 
 ## Is there a mobile app?
 
-No, not currently. GranClaw is a local desktop and server application. The dashboard runs in your browser at `localhost`, which means it is accessible from a mobile browser if your device is on the same network as the machine running GranClaw — but there is no dedicated mobile app, and the UI is optimized for desktop.
+No. The dashboard is browser-based at `localhost`. Use [Telegram integration](/agent-superpowers/telegram-integration) for mobile access.
 
 **Next:** [Troubleshooting](/reference/troubleshooting)

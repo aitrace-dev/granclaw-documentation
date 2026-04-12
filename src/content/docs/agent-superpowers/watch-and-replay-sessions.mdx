@@ -8,40 +8,18 @@ backlinks: [agent-superpowers/browser-profiles]
 
 import Callout from '../../../components/Callout.astro';
 
-See what your agent sees, live or recorded.
+## Live view
 
-When an agent is browsing the web on your behalf, you don't have to trust that it is doing the right thing — you can watch it happen. GranClaw gives you two ways to observe browser sessions: a live view that streams the agent's screen in real time, and a recorded replay you can review after the session ends.
+While the agent has an active browser session, open the live view panel. You get a real-time stream of the agent's screen. Opening the panel doesn't interrupt the agent — it keeps working.
 
-## Opening a live session
+## Replay
 
-While an agent has an active browser session, the dashboard shows a live view panel for that session. Open it and you get a real-time stream of the agent's screen — the exact same page the agent is looking at, updated as it navigates, scrolls, clicks, and types.
-
-The current tab is labeled at the top of the panel. As the agent switches tabs, the label updates and the stream follows automatically. You always see the active page, not a frozen snapshot.
-
-You can watch without interrupting. The agent continues working whether the panel is open or closed — opening it just connects you as an observer. Close the panel when you are done, and nothing changes for the agent.
-
-## Replaying a finished session
-
-When a browser session ends, the live view transitions into a replay. The same panel now shows a video of the entire session — a real WebM recording of everything the agent did, from the first page load to the last action.
-
-The replay includes chapter markers for every command the agent ran during the session. You can jump directly to the moment the agent filled in a form, clicked a button, or navigated to a specific page. The chapters act as a table of contents for the session, so you don't have to scrub through minutes of video to find the part you care about.
-
-This is useful for auditing, for debugging when something went wrong, and for understanding exactly what actions your agent took in your name.
+When a session ends, the panel becomes a replay. A WebM recording of the full session with chapter markers for every command the agent ran — jump directly to any action without scrubbing.
 
 <Callout type="note">
-Session recordings are stored locally on your machine, inside the agent's workspace directory. They are never sent anywhere. Only you can access them.
+Recordings are stored locally inside the agent's workspace. Never sent anywhere.
 </Callout>
 
-## What you can see
-
-The live and replay views show you everything happening in the browser window: pages the agent visits, text it reads, forms it fills out, buttons it clicks. What you see is exactly what the agent saw.
-
-You will not see the agent's internal reasoning or the tool calls it made — those are in the chat panel and in the logs view. The browser viewer is specifically for the visual, on-screen activity.
-
-## When to use it
-
-Live view is most useful when you are starting to trust a new agent with a task. Watch the first few runs to confirm it is navigating correctly and handling edge cases the way you expect. Once you are confident, you can let future sessions run unobserved.
-
-Replay is useful after the fact — especially when a task produced unexpected results and you want to understand what actually happened. Watching the session recording is often faster than reading through logs.
+The live and replay views show what's on screen. For reasoning and tool calls, see the chat panel and logs view.
 
 **Next:** [Telegram integration](/agent-superpowers/telegram-integration)

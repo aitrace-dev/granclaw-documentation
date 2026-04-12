@@ -6,42 +6,25 @@ tags: [philosophy, local-first]
 backlinks: [getting-started/introduction, data-and-privacy/secrets]
 ---
 
-Why everything runs on your hardware.
+> *"Tools should not own the craftsman."*
 
-GranClaw runs on your machine, stores everything on your machine, and sends nothing outside it except the LLM calls you explicitly authorize to the provider you choose. This is a deliberate design choice, not a limitation — and the reasons behind it are worth spelling out.
+GranClaw runs on your machine. Everything is stored locally. Nothing leaves your hardware except the LLM calls you make to the provider you chose.
 
-## The manifesto
-
-> *"Tools should not own the craftsman. The software we use to think must be as durable as the physical books on our shelves."*
-
-That sentence drives every decision in how GranClaw is built. A tool that holds your data hostage, requires a subscription to keep running, or disappears if the company shuts down is not really your tool. GranClaw is designed to be yours in the same way a notebook is yours: you can put it down, pick it up, copy it, and keep it forever.
-
-## No cloud, no tracking
-
-GranClaw has no telemetry. No analytics. No "anonymous usage data" being collected and sent to a server somewhere. Nothing leaves your machine except the API calls you make to the LLM provider you configured — and you control which provider that is, what model it uses, and when calls are made.
-
-There is no GranClaw account. No sign-up. No phone home. The dashboard runs at `localhost`. Your agents run as processes on your hardware. Your data stays in your directories.
-
-This also means there is no one to call if something goes wrong at our end — because there is no "our end." The only infrastructure in the loop is the LLM provider you chose, and you can switch that out from the settings panel at any time.
+No account. No sign-up. No telemetry. No phone home.
 
 ## Bring your own LLM
 
-GranClaw works with any of the major providers: OpenAI, Anthropic, Google Gemini, Groq, and OpenRouter. You configure the provider and model per agent, from the dashboard, with no restart required.
+OpenAI, Anthropic, Gemini, Groq, OpenRouter. Configure per agent, swap anytime, mix providers across agents. No provider is the default. No lock-in.
 
-No provider is the default. No provider is preferred. If a new model comes out and you want to use it, you change a setting. If you want different agents to use different providers — one on Claude for reasoning tasks, another on Gemini for browsing — you do that from the same panel. The framework does not care which provider you use. It works the same either way.
+## Durable formats
 
-This is what "no lock-in" means in practice. You are not tied to a single company's pricing, availability, or policy decisions. If a provider raises prices or discontinues a model, you move to another one.
+| Data | Format |
+|---|---|
+| Agent memory | Plain markdown in `vault/` |
+| Conversation history | SQLite |
+| Configuration | Plain JSON |
+| Secrets | Encrypted, env vars only |
 
-## Durable by design
-
-GranClaw stores everything in formats that will outlast the software itself.
-
-Your agent's memory lives in plain markdown files in a `vault/` directory. Open that folder in any text editor, any time, with no GranClaw installed — the files are readable. Open it in [Obsidian](https://obsidian.md) and the full graph of notes and wikilinks appears exactly as your agent left it.
-
-Conversation history and task data are stored in SQLite — a file format that has been stable for decades and is supported by dozens of tools. If you ever want to query your agent's full conversation history directly, any SQLite browser can open those files.
-
-Configuration is plain JSON. Agent settings are human-readable text you can edit with any editor.
-
-The only thing that cannot survive without GranClaw is your secrets — they are encrypted and exist as environment variables only inside the agent process. Everything else is in a format that will outlive the software. If GranClaw is abandoned tomorrow, your data is still yours, in formats you can open today.
+If GranClaw is abandoned tomorrow, every file is still readable. Open the vault in any text editor. Query history in any SQLite browser. Edit config in any editor.
 
 **Next:** [FAQ](/reference/faq)

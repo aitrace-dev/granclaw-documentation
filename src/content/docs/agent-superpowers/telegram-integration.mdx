@@ -8,50 +8,28 @@ backlinks: [using-granclaw/schedules-and-workflows]
 
 import Callout from '../../../components/Callout.astro';
 
-Talk to your agent from your phone.
+Same experience as the dashboard — from your phone. Instant acknowledgment, typing indicator, live status board as each tool runs.
 
-The dashboard is great when you are at your desk. Telegram is what you use when you're not. With Telegram integration enabled, you can send your agent a message from anywhere — your phone, your tablet, another computer — and get the same real-time experience you expect from the dashboard.
+Replies are sent in the language you write in (English, Spanish, Chinese — auto-detected).
 
-## Why Telegram
+## Setup
 
-Telegram is where the experience stands out. The integration doesn't just relay messages back and forth. It recreates the full live feel of the dashboard inside a Telegram chat.
-
-Send a message and you get an instant acknowledgment — the agent confirms it received your request immediately, before it has started working. Then a typing indicator appears while the agent is thinking. As the agent runs each tool, a live status board updates in the chat, growing step by step as each action completes. By the time the agent's final reply arrives, you've watched the whole run happen.
-
-This matches exactly what you see on the dashboard. The only difference is your device.
-
-GranClaw also matches the language you write in. Acknowledgments and status messages are sent in English, Spanish, or Chinese based on the language of your message. You don't configure this — it just works.
-
-## Setting up the integration
-
-You need a Telegram bot to connect an agent. Creating one takes about two minutes.
-
-1. Open Telegram and find **@BotFather** — the official bot that creates and manages bots.
-2. Send `/newbot` and follow the prompts. You'll choose a name and a username for your bot.
-3. BotFather gives you a bot token — a long string that looks like `123456789:ABC-DEF...`. Copy it.
-
-Once you have the token, open the GranClaw dashboard, go to your agent's settings, and find the Telegram section. Enable the toggle, paste the token into the bot token field, and save.
+1. Message **@BotFather** on Telegram → `/newbot` → follow prompts → copy your bot token.
+2. Agent settings → **Telegram** → enable → paste token → save.
+3. Open Telegram, find your bot, send a message.
 
 <Callout type="tip">
-Your bot token is stored encrypted in GranClaw's secrets vault — the same system that protects API keys and credentials. It is never exposed in plain text in the UI or in any file on disk. If you need to rotate it, paste a new token in the same field and save again.
+The token is stored encrypted in the secrets vault. To rotate it, paste a new one and save.
 </Callout>
 
-After saving, your bot is live. Open Telegram, find your bot by its username, and send it a message. The agent will respond.
+## What works over Telegram
 
-## What you can do over Telegram
+Everything in the dashboard chat: browsing tasks, vault queries, workflow status, instructions. Long replies are split automatically at Telegram's 4000-character limit.
 
-Everything you can ask in the dashboard chat, you can ask over Telegram. The agent has full access to its tools, its vault, its browser, and its task board. You can kick off a browsing task, ask it to check something in your vault, or get a status update on a running workflow — all from the Telegram interface.
+## Dashboard-only
 
-Responses that are very long are split automatically into multiple messages. The 4000-character Telegram message limit is handled for you — you will never see a truncated reply.
-
-## What you cannot do over Telegram
-
-A few things are dashboard-only:
-
-- You cannot watch a live browser session from Telegram. The streaming view is a visual component that only works in the dashboard.
-- You cannot manage agent settings, configure schedules, or change the agent's configuration from Telegram. Those actions require the dashboard.
-- You cannot upload files or attachments through the Telegram integration in the current version.
-
-For everything else — asking questions, giving instructions, checking in on running tasks — Telegram works exactly like the dashboard chat.
+- Live browser stream
+- Agent settings and schedule configuration
+- File uploads
 
 **Next:** [Vault — Obsidian memory](/agent-superpowers/vault-obsidian-memory)

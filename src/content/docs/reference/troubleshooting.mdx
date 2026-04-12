@@ -8,68 +8,59 @@ backlinks: [reference/faq]
 
 import Callout from '../../../components/Callout.astro';
 
-When something breaks, here's what to check.
-
-Most problems in GranClaw fall into a small number of categories — provider misconfiguration, a port conflict, a missing credential, or a browser session that has gone stale. Work through the relevant section below and you should have it running again in a few minutes.
-
 ## Dashboard won't load
 
-- **Check the terminal** — the most useful information is always in the terminal where you started GranClaw. Look for error messages, especially anything about a port already in use.
-- **Port conflict** — if something else is using port 8787 (or your configured port), GranClaw will fail to start. Stop the conflicting process or start GranClaw on a different port with `--port <number>`.
-- **Node version** — GranClaw requires Node 20 or higher. Run `node --version` to check. Upgrade via [nvm](https://github.com/nvm-sh/nvm) or the official Node installer if needed.
-- **Missing dependencies** — if you cloned the repo and skipped `npm install`, run it from the project root.
-- **Try a hard refresh** — if the server is running but the page looks broken, try `Ctrl+Shift+R` (or `Cmd+Shift+R` on macOS) to bypass the browser cache.
+- Check the terminal for errors — especially port conflicts
+- Port in use → stop the other process or use `--port <number>`
+- `node --version` must be 20+
+- Cloned the repo? Run `npm install` first
+- Page looks broken → hard refresh `Cmd+Shift+R`
 
 ## Agent reply never streams
 
-- **Provider not configured** — go to Settings and confirm you have a provider configured with an API key. If the provider field is empty or the key field is blank, the agent has nothing to call.
-- **Invalid API key** — double-check the key in the provider's developer console to verify it is valid and active.
-- **Quota exhausted** — check your usage dashboard on the provider's website. A key that has hit its spending limit or rate limit will fail silently.
-- **Model name typo** — verify the model name exactly matches the provider's documentation. A single character difference will cause the call to fail.
-- **Agent process not running** — check the dashboard's agent card for the process status. If the agent is shown as stopped, start it from the dashboard.
+- Settings → confirm a provider is configured with a valid API key
+- Check your provider's dashboard for quota or rate limit issues
+- Verify the model name matches your provider's docs exactly
+- Check the agent card status — start the agent if it's stopped
 
 ## Browser session won't log in
 
-- **CAPTCHA** — open the live session view in the dashboard, complete the CAPTCHA manually, and let the agent continue. The profile saves the authenticated state for future sessions.
-- **Expired cookies** — ask the agent to navigate to the login page and log in again. The new session is saved to the profile.
-- **Profile corruption** — delete the browser profile from the agent's settings and log in fresh.
-- **Chrome not found** — GranClaw launches Chrome for browser sessions. If Chrome is not installed or in an unexpected location, the session fails with an error in the terminal.
+- CAPTCHA → open the live session view, complete it manually
+- Expired cookies → walk the agent through login again
+- Profile corrupted → delete it in agent settings, log in fresh
+- Chrome not found → check Chrome is installed
 
 ## Telegram doesn't respond
 
-- **Bot token missing** — open the agent's settings, find the Telegram section, and confirm the bot token is filled in.
-- **Webhook not set** — after entering the token, check that the webhook registered successfully. If the status shows an error, save the token again to re-register.
-- **Agent not linked** — confirm the agent you are trying to reach is the one configured with that bot token.
-- **Agent process not running** — Telegram messages are delivered to the running agent process. Messages queue if the agent is stopped.
+- Check the bot token is saved in agent settings → Telegram
+- If webhook shows an error, save the token again to re-register
+- Confirm the right agent has the token
+- Agent process must be running — messages queue if it's stopped
 
 ## Vault is empty after restart
 
-- **Wrong workspace directory** — check the agent configuration to confirm the workspace directory is set correctly and points to a real path on disk.
-- **Agent ID mismatch** — if you changed an agent's ID after it was created, GranClaw looks for the vault in a new directory without the old content. The original workspace is still at its old path — move the files manually.
-- **GRANCLAW_HOME mismatch** — if the agent was started with a custom `GRANCLAW_HOME` and you restarted without it, it will look in `~/.granclaw/` instead of the custom path.
+- Verify the workspace directory path in agent settings
+- Changed the agent's ID? The vault is in the old directory — move files manually
+- `GRANCLAW_HOME` mismatch → agent is looking in the wrong base directory
 
 ## Schedule didn't fire
 
-- **Cron syntax mistake** — the schedule settings page shows a human-readable interpretation of your expression. Verify it says what you intended; field order is minute, hour, day, month, weekday.
-- **Backend not running** — if the server was not running at the scheduled time, the task didn't fire. It will run at the next matching time once the server restarts.
-- **Timezone mismatch** — schedules run in the server's local timezone. For server deployments in a different timezone, adjust the cron expression accordingly.
+- Check cron syntax in settings (field order: minute hour day month weekday)
+- Server not running at fire time → runs at the next matching time on restart
+- Server deployment? Adjust cron for the server's timezone
 
 ## High token cost
 
-- **Caching disabled** — GranClaw uses prompt caching where the provider supports it. If caching is not working, you may be paying full price for tokens that would otherwise be served from cache. Check the Usage page to see cache hit rates.
-- **Verbose system prompt** — review the agent's configuration and trim anything that isn't actively useful. Every token in the system prompt is charged on every message.
-- **Wrong model for the task** — frontier models (GPT-4o, Claude Opus, Gemini Ultra) are priced higher per token. For simple tasks like summarizing text or formatting data, a smaller model works just as well at a fraction of the cost. Switch the model in Settings.
+- Check cache hit rate in the Usage panel — low hit rate means you're paying full price
+- Trim the agent's system prompt — every token there is charged on every message
+- Switch to a smaller model for simple tasks
 
 ## "Capability denied" error
 
-- **Tool not approved** — the agent tried to use a capability that hasn't been granted yet. If you have the Guardian feature enabled, open the approval queue in the dashboard and approve the specific capability. If Guardian is not enabled, check the agent's allowed tools configuration.
-- **MCP server not installed** — if the agent references an MCP tool that isn't installed, the capability will be denied because the server isn't there to serve it. Go to the agent's Tools section and install the relevant tool.
-- **Tier mismatch** — certain capabilities require explicit user approval. If the agent is asking for a high-risk capability (file system writes, shell access, destructive operations), approve it manually from the guardian's approval queue.
+- Guardian enabled → open the approval queue and approve the capability
+- MCP server not installed → agent settings → Tools → install it
+- High-risk capability → requires manual approval from the guardian queue
 
 <Callout type="note">
-If none of the above resolves your problem, the [Discord community](https://discord.gg/granclaw) is the fastest way to get help. Include the error message from your terminal and a description of what you were trying to do when it happened.
+Still stuck? [Discord community](https://discord.gg/granclaw). Include the terminal error and what you were doing.
 </Callout>
-
----
-
-**You've reached the end.** Nothing else to read. Go build something.

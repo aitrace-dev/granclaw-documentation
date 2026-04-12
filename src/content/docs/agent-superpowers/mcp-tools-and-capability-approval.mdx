@@ -8,52 +8,26 @@ backlinks: [data-and-privacy/secrets]
 
 import Callout from '../../../components/Callout.astro';
 
-Give your agent new skills, with the brakes on.
+MCP tools extend what your agent can do — Linear, GitHub, email, databases, anything with an MCP integration. Install from agent settings → **Tools**. Restart the agent to pick it up.
 
-GranClaw agents can use tools beyond what they ship with — integrations for services like Linear, GitHub, and others that extend what they can do. MCP (Model Context Protocol) is the standard that makes this work. You find a tool, install it from the dashboard, and your agent can use it. What keeps this safe is the capability approval system: every new skill a tool adds passes through a three-tier gate before your agent can act on it.
+Tools are scoped per agent. Installing for one agent doesn't affect others.
 
-## What MCP tools are
+## Capability approval (three tiers)
 
-An MCP tool is a plugin that gives your agent new capabilities. Instead of writing code or maintaining integrations yourself, you install a tool and the agent gains access to a new set of actions.
+| Tier | What happens |
+|---|---|
+| **Auto-approve** | Low-risk, matches your allow list. Granted immediately. |
+| **Auto-deny** | On your block list (shell access, destructive ops). Denied always. |
+| **Ask user** | Falls outside both lists. Surfaced in your dashboard — you approve or deny. |
 
-A tool might let the agent create and update issues in a project tracker, read and send emails, query a database, or interact with any other service that has published an MCP integration. The tool defines what actions are available, and the agent decides when to use them.
-
-Tools are scoped per agent. Installing a tool for one agent doesn't affect any other agent on the same machine.
-
-## Installing a tool
-
-Go to your agent's settings in the dashboard and open the Tools section. From there you can browse available tools and install one by selecting it. The installation adds the tool's capabilities to your agent's profile.
-
-After installation, restart the agent process so it picks up the new tool. The agent can then use those capabilities in any future conversation. You don't need to tell it the tool is there — it discovers what it can do from its configuration.
-
-## The capability approval gate
-
-Not every capability should be granted automatically. A tool that reads data is different from a tool that deletes records. A capability that stays within one service is different from one that can reach across your system.
-
-GranClaw's capability approval system evaluates every new capability against a three-tier policy:
-
-1. **Auto-approve** — the capability is low-risk and matches your guardian's allow list. Read-only tools, informational queries, and other non-destructive actions typically fall here. The agent gets access immediately, with no prompt.
-
-2. **Auto-deny** — the capability is on your guardian's block list. Shell access, destructive operations, and other high-risk actions are denied outright. The agent cannot use them regardless of what the tool offers.
-
-3. **Ask user** — the capability falls outside both lists and requires a human decision. The guardian holds the request and surfaces it in your dashboard. You see exactly what the agent is asking for and why. Approve it to grant access, or deny it to block it. The agent waits until you decide.
+Think of it as sudo for your agent. The agent can request elevated access; it cannot grant itself access.
 
 <Callout type="note">
-The capability approval system is a Guardian feature. Guardian is coming in a future release. Until then, tool capabilities are granted based on your agent's allowed tools configuration.
+Capability approval is a Guardian feature, coming in a future release. Until then, access is based on the agent's allowed tools configuration.
 </Callout>
 
-Think of it as sudo for your agent. The agent can request elevated access, but it cannot grant itself access. Someone has to approve.
+## Revoking
 
-## Revoking a tool
-
-To remove a tool's capabilities from an agent, go back to the Tools section in agent settings and uninstall it. The agent loses access to those capabilities immediately on its next restart.
-
-If you approved a specific capability through the "ask user" gate and want to revoke it without removing the whole tool, you can manage individual approvals from the guardian's approval history view. Revoke the specific permission and the agent can no longer act on it.
-
-## Staying in control
-
-Scoped installation plus the three-tier gate lets you experiment without anxiety. Install a new integration, watch what it does, revoke it if it doesn't fit. Auto-deny keeps the riskiest capabilities off the table. Ask-user keeps you in the loop for everything in between.
-
-Your agent grows its skills over time. You decide what it can do.
+Agent settings → **Tools** → uninstall. Takes effect on next restart. Individual capability approvals can be revoked from the guardian's approval history view.
 
 **Next:** [Secrets](/data-and-privacy/secrets)
