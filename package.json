@@ -1,0 +1,25 @@
+{
+  "name": "granclaw-documentation",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && pagefind --site dist && node scripts/check-backlinks.mjs",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "playwright test",
+    "test:install": "playwright install chromium"
+  },
+  "dependencies": {
+    "astro": "^4.16.0",
+    "@astrojs/mdx": "^3.1.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "pagefind": "^1.1.0",
+    "typescript": "^5.6.0"
+  }
+}
