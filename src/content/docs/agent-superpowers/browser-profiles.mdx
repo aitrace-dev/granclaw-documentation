@@ -1,0 +1,51 @@
+---
+title: Browser profiles (log in once)
+description: Log in once. Never again.
+section: agent-superpowers
+tags: [browser, sessions]
+backlinks: [using-granclaw/resume-and-reuse-sessions, agent-superpowers/watch-and-replay-sessions]
+---
+
+import Callout from '../../../components/Callout.astro';
+
+Log in once. Never again.
+
+Most tools that automate the web ask you to configure API keys for every service you want to touch. But most sites you actually use — LinkedIn, Gmail, Notion, your company's internal dashboard — don't have an API. They have a login page. GranClaw's browser profiles let your agent use those sites exactly the way you do: by being signed in.
+
+## What a browser profile is
+
+A browser profile is a persisted Chrome user data directory — the same thing Chrome uses when it remembers your passwords and keeps you logged into sites. Every agent in GranClaw gets its own dedicated profile, stored locally on your machine.
+
+When the agent opens a browser session, it opens Chrome using that profile. Any cookies, saved logins, or site preferences from the last session are already there. The agent walks into a browser that already knows who it is.
+
+## Logging in for the first time
+
+The first time you want an agent to use a site, ask the agent to open a browser and go there. It will land on the login page just like any other user would. Walk the agent through the login — tell it your username, or let it read the credentials from your secrets vault — and it will complete the authentication just as you would in a normal browser window.
+
+After that first login, the session is saved. The next time the agent opens that site, it will already be authenticated. You never have to repeat the process.
+
+<Callout type="tip">
+If a site uses two-factor authentication, log in manually the first time using the browser panel, complete the 2FA step yourself, and let the profile save the authenticated state. Future sessions will use the saved cookie and won't ask for 2FA again unless the session expires.
+</Callout>
+
+## Isolation between agents
+
+Each agent has exactly one browser profile, and no two agents share a profile. That isolation is complete by design.
+
+An agent you configure for LinkedIn will never see the cookies or saved sessions of an agent you configure for Gmail. They run in separate Chrome processes, reading from separate profile directories. One agent cannot access, inspect, or accidentally touch the sessions of another.
+
+This matters when you are running multiple agents on the same machine. A content agent that manages social media and a research agent that scrapes information sources can both be logged into different accounts on the same service without any risk of cross-contamination.
+
+## Where profiles are stored
+
+Browser profiles live inside each agent's workspace directory on your machine, under `~/.granclaw/` by default. You can point GranClaw to a different home directory using the `--home` flag or the `GRANCLAW_HOME` environment variable, and the profiles move with it.
+
+Because profiles are just directories on disk, they are included automatically in any agent export. If you export an agent and import it on another machine, its browser profiles — including all saved sessions — come along.
+
+## When a session expires
+
+Sessions do eventually expire. When that happens, the agent lands on a login page instead of the authenticated view it expected. The fix is the same as the first time: let the agent run through the login flow, and the new session is saved for future turns.
+
+If an agent repeatedly fails on a site it used to handle smoothly, a logged-out session is the most common cause. Watch a live session and look for a login prompt.
+
+**Next:** [Watch & replay sessions](/agent-superpowers/watch-and-replay-sessions)

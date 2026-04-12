@@ -1,0 +1,51 @@
+---
+title: Vault — Obsidian memory
+description: Your agent's brain is just markdown files.
+section: agent-superpowers
+tags: [vault, obsidian, memory]
+backlinks: [data-and-privacy/export-and-import-agents]
+---
+
+Your agent's brain is just markdown files.
+
+Every GranClaw agent has a vault — a folder of plain markdown files where it keeps everything it wants to remember. Daily journals, action logs, research findings, notes on topics it is tracking, wikilinks connecting ideas together. Open that folder in [Obsidian](https://obsidian.md) and you are browsing your agent's memory exactly as if it were one of your own notebooks.
+
+No export step. No special viewer. The files are already there, already yours.
+
+## What the vault contains
+
+An agent builds its vault as it works. Over time you will find:
+
+- **Daily journals** — a note for each day, recording what the agent did and what it learned.
+- **Action logs** — a record of significant actions the agent took: tasks it completed, searches it ran, decisions it made.
+- **Topic notes** — notes the agent creates when it encounters something worth remembering: a person, a project, a concept it might need later.
+- **Research findings** — when the agent investigates something, it writes up what it found so it doesn't have to look it up again.
+- **Wikilinks** — `[[double-bracket]]` links between notes, creating a graph of connected ideas the agent can follow when it needs context.
+
+None of this requires configuration. The agent writes to the vault on its own as it works through tasks.
+
+## Opening the vault in Obsidian
+
+The vault is just a directory. Point Obsidian at it and the full graph of your agent's notes appears as a standard Obsidian vault.
+
+By default, the vault lives inside the agent's workspace at `~/.granclaw/workspaces/<agent-id>/vault/`. Open Obsidian, choose "Open folder as vault", and navigate there. That's it.
+
+You get all of Obsidian's features immediately: the graph view showing how ideas connect, backlinks, tags, quick search, the canvas. The wikilinks the agent wrote are real Obsidian wikilinks — they resolve and navigate exactly as expected.
+
+## Writing to the vault yourself
+
+The vault is a two-way street. You can add, edit, and delete files in the vault just like any other markdown files. The agent will read your notes on its next turn.
+
+This is the simplest way to give your agent structured context. Create a note called `projects/my-launch.md`, write down everything the agent needs to know about the project, and tell the agent "read my-launch in the vault before we start." It will find it and use it.
+
+You can also leave instructions, preferences, or corrections. The agent treats your notes as part of its knowledge base — no different from notes it wrote itself.
+
+## Vault persistence and portability
+
+The vault persists across all restarts, updates, and machine reboots. Because it is just files on disk, there is nothing to synchronize and nothing that can silently disappear.
+
+When you export an agent, the vault is included in the zip. Import the agent on another machine and the vault comes with it — complete, intact, and immediately openable in Obsidian. Your agent's memory travels with it.
+
+The vault's plain text format also means it will be readable as long as there are text editors. You are not storing your agent's knowledge in a proprietary database. You are storing it in markdown — a format that will outlast any software product, including GranClaw.
+
+**Next:** [MCP tools & capability approval](/agent-superpowers/mcp-tools-and-capability-approval)
