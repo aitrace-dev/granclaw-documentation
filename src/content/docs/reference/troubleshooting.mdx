@@ -18,26 +18,26 @@ import Callout from '../../../components/Callout.astro';
 
 ## Agent reply never streams
 
-- Settings → confirm a provider is configured with a valid API key
+- [Settings](/getting-started/configure-llm-provider) → confirm a provider is configured with a valid API key
 - Check your provider's dashboard for quota or rate limit issues
 - Verify the model name matches your provider's docs exactly
 - Check the agent card status — start the agent if it's stopped
 
 ## Browser session won't log in
 
-- CAPTCHA → open the live session view, complete it manually
+- CAPTCHA → open the [live session view](/agent-superpowers/browse-control), complete it manually
 - Expired cookies → walk the agent through login again
 - Profile corrupted → delete it in agent settings, log in fresh
 - Chrome not found → check Chrome is installed
 
 ## Telegram doesn't respond
 
-- Check the bot token is saved in agent settings → Telegram
+- Check the bot token is saved in agent settings → [Telegram](/agent-superpowers/telegram-integration)
 - If webhook shows an error, save the token again to re-register
 - Confirm the right agent has the token
 - Agent process must be running — messages queue if it's stopped
 
-## Vault is empty after restart
+## [Vault](/agent-superpowers/vault-obsidian-memory) is empty after restart
 
 - Verify the workspace directory path in agent settings
 - Changed the agent's ID? The vault is in the old directory — move files manually
@@ -51,14 +51,14 @@ import Callout from '../../../components/Callout.astro';
 
 ## High token cost
 
-- Check cache hit rate in the Usage panel — low hit rate means you're paying full price
+- Check cache hit rate in the [Usage panel](/using-granclaw/usage-and-costs) — low hit rate means you're paying full price
 - Trim the agent's system prompt — every token there is charged on every message
 - Switch to a smaller model for simple tasks
 
 ## "Capability denied" error
 
 - Guardian enabled → open the approval queue and approve the capability
-- MCP server not installed → agent settings → Tools → install it
+- [MCP](/agent-superpowers/mcp-tools-and-capability-approval) server not installed → agent settings → Tools → install it
 - High-risk capability → requires manual approval from the guardian queue
 
 <Callout type="note">

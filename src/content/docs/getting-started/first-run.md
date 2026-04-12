@@ -8,7 +8,7 @@ backlinks: [using-granclaw/chat, getting-started/configure-llm-provider]
 
 ## Open the dashboard
 
-Go to `http://localhost:5173`. You'll see one agent card: `main-agent`.
+Go to [http://localhost:5173](http://localhost:5173). You'll see one agent card: `main-agent`.
 
 ## Send a message
 

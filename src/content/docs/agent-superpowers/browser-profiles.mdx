@@ -15,7 +15,7 @@ Each agent has its own persistent Chrome profile. Log in to any site once and th
 Ask the agent to open a browser and navigate to the site. It lands on the login page, completes authentication, and saves the session. Done.
 
 <Callout type="tip">
-For 2FA sites: use the live browser panel to complete the 2FA step yourself the first time. The profile saves the authenticated cookie — future sessions skip 2FA unless it expires.
+For 2FA sites: use the [live browser panel](/agent-superpowers/browse-control) to complete the 2FA step yourself the first time. The profile saves the authenticated cookie — future sessions skip 2FA unless it expires.
 </Callout>
 
 ## Isolation
@@ -24,7 +24,7 @@ Each agent reads from its own profile directory. No two agents share cookies or 
 
 ## Storage
 
-Profiles live in `~/.granclaw/workspaces/<agent-id>/`. They're included in agent exports and travel with the agent to a new machine.
+Profiles live in `~/.granclaw/workspaces/<agent-id>/`. They're included in [agent exports](/data-and-privacy/export-and-import-agents) and travel with the agent to a new machine.
 
 ## Expired sessions
 

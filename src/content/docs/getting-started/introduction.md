@@ -13,11 +13,11 @@ Everything runs locally. Nothing is sent anywhere except the LLM calls you make 
 ## What it can do
 
 - **Chat** — streaming replies, tool calls shown inline as they happen
-- **Browse the web** — real Chrome sessions, watch live or replay after
-- **Remember things** — vault of markdown files, works in Obsidian
-- **Plan and track** — built-in kanban every agent knows how to use
-- **Run on a timer** — cron schedules, no keyboard required
-- **Telegram** — send messages from your phone, live status updates
+- **Browse the web** — real Chrome sessions, [watch live or replay after](/agent-superpowers/watch-and-replay-sessions)
+- **Remember things** — [vault](/agent-superpowers/vault-obsidian-memory) of markdown files, works in [Obsidian](https://obsidian.md)
+- **Plan and track** — built-in [kanban](/using-granclaw/mission-control) every agent knows how to use
+- **Run on a timer** — [cron schedules](/using-granclaw/schedules-and-workflows), no keyboard required
+- **Telegram** — [send messages from your phone](/agent-superpowers/telegram-integration), live status updates
 
 ## Why local-first
 
