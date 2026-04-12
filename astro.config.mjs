@@ -13,4 +13,11 @@ export default defineConfig({
       wrap: true,
     },
   },
+  vite: {
+    build: {
+      rollupOptions: {
+        external: [/^\/_?pagefind\//],
+      },
+    },
+  },
 });
