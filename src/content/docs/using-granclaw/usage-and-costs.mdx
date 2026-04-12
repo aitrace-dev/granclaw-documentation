@@ -1,0 +1,49 @@
+---
+title: Usage and costs
+description: Every token. Every session. No surprises.
+section: using-granclaw
+tags: [cost, tokens]
+backlinks: [getting-started/configure-llm-provider]
+---
+
+import Callout from '../../../components/Callout.astro';
+
+Every token. Every session. No surprises.
+
+## The Usage panel
+
+Open the Usage panel from the sidebar to see a complete record of everything your agents have consumed. The panel is organized by agent, session, and date, so you can find a specific conversation and see exactly what it cost, or scroll through daily totals to understand your spending over time.
+
+Nothing is estimated retroactively or approximated. GranClaw records token counts at the moment each API call returns — the exact numbers your provider charged you for.
+
+## What it tracks
+
+For every session, GranClaw records:
+
+- **Input tokens** — the tokens in the prompt sent to the model, including conversation history and any tool results injected into context.
+- **Output tokens** — the tokens in the model's reply.
+- **Cache reads** — tokens served from the provider's prompt cache rather than re-processed. These cost a fraction of a full input token and are shown separately so you can see how well caching is helping.
+- **Cache writes** — tokens written into the provider's cache during this session. Cache writes have a small premium over regular input tokens, but they pay off quickly when the same context is reused across multiple turns.
+- **Model** — which model handled this session. If you use multiple agents on different models, you'll see each model's consumption listed separately.
+
+The Usage panel rolls all of this up into per-session, per-day, and per-model totals.
+
+## Daily and monthly rollups
+
+The chart at the top of the Usage panel shows your token consumption across days. Hover over any bar to see the breakdown for that day: how many sessions ran, which models were used, and the input/output/cache split.
+
+Below the chart, a table lists every session with its date, agent, model, and token totals. You can sort by any column. If you run scheduled tasks, those appear as separate session rows — labelled with the schedule name — so you can see exactly how much your automated workflows are consuming alongside your interactive sessions.
+
+## Cost estimates
+
+GranClaw shows cost estimates based on each provider's published pricing at the time of the release. The estimate for a session appears next to the token counts.
+
+These are estimates, not invoices. Your actual bill comes from your provider. If your provider updates their pricing, GranClaw's estimates will be slightly off until the next update. When accuracy matters — for budgeting, for deciding whether to switch models — check your provider dashboard directly and use GranClaw's token counts as the source of truth.
+
+<Callout type="note">
+If you use OpenRouter, the cost estimate reflects OpenRouter's rates, which may differ from the upstream provider's direct pricing. OpenRouter's own usage dashboard is the authoritative source for your charges there.
+</Callout>
+
+The detailed per-session breakdown is particularly useful for catching runaway conversations — sessions where an agent looped, hit an error repeatedly, or loaded an unexpectedly large document into context. Scroll through the session table, sort by token count descending, and the expensive outliers will be immediately visible.
+
+**Next:** [Browser profiles](/agent-superpowers/browser-profiles)

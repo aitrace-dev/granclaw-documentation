@@ -1,0 +1,43 @@
+---
+title: Chat
+description: The chat window, and what each piece does.
+section: using-granclaw
+tags: [chat, ui]
+backlinks: [using-granclaw/resume-and-reuse-sessions]
+---
+
+import Callout from '../../../components/Callout.astro';
+
+The chat window, and what each piece does.
+
+## Opening a chat
+
+Click any agent card in the Agents panel to open its chat window. If this is your first time opening it, you'll see an empty message thread and a text input at the bottom. The agent's name and model appear at the top, so you always know which agent you are talking to and what it is running on.
+
+Type a message and press Enter — or click the send button — to begin. The reply starts streaming immediately, token by token, exactly as the agent produces it. You don't wait for the full response to finish before reading it. If the agent needs to run a tool before it can answer — searching a file, looking something up on the web, writing a note to its vault — you'll see that tool call appear inline in the message thread as it happens.
+
+## Streaming replies and tool calls
+
+Every response is streamed live over a WebSocket connection. You see the words appear as the model generates them, without page reloads or polling. When the agent invokes a tool, the chat shows a collapsible tool-call block: what was called, with what arguments, and what came back. You can expand any block to see the full details.
+
+This transparency is intentional. You can watch your agent browse a page, write a file, or call an API — and see exactly what it did, right in the message thread, without navigating away.
+
+## The kanban and sidebar panels
+
+While you chat, the Mission Control panel is always one click away. It shows the agent's current task board — a kanban of todo, doing, blocked, and done cards. If you ask the agent to plan something, it creates those cards itself and moves them as work progresses.
+
+A second panel shows recent tool calls organized by session. You can glance at what actions the agent took during the current conversation, and drill into any of them without scrolling back through the full chat history.
+
+## Stop button, history, and the danger zone
+
+The **Stop** button appears while the agent is generating a reply or running a tool. Clicking it sends an interrupt signal. The current action stops cleanly, and you can send a new message immediately.
+
+Scroll up in the chat thread to read previous messages from this session and past sessions. GranClaw stores your full conversation history locally, so older exchanges are always available — not just the current session window.
+
+At the bottom of the agent settings panel you'll find the **Danger Zone**. This contains the wipe action, which deletes the agent's conversation history, vault, and databases. It is irreversible. Use it only when you genuinely want to start the agent from scratch. If you just want to try something new, create a second agent instead — each one is fully independent.
+
+<Callout type="warning">
+The wipe action cannot be undone. If you want to preserve the agent's current state before experimenting, use the export feature to download a full backup zip first.
+</Callout>
+
+**Next:** [Resume and reuse sessions](/using-granclaw/resume-and-reuse-sessions)

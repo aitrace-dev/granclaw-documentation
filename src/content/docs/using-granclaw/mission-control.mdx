@@ -1,0 +1,44 @@
+---
+title: Mission Control
+description: A kanban your agent already knows how to use.
+section: using-granclaw
+tags: [kanban, workflows]
+backlinks: [using-granclaw/schedules-and-workflows]
+---
+
+import Callout from '../../../components/Callout.astro';
+
+A kanban your agent already knows how to use.
+
+## What Mission Control is
+
+Mission Control is a built-in kanban board that every GranClaw agent can read and write. You don't configure it, you don't teach the agent how to use it, and you don't install anything. It is there from the first message, and the agent already understands it.
+
+Every agent has its own board. Open the Mission Control panel from the sidebar while chatting with an agent, and you'll see that agent's current task landscape: columns for **Todo**, **Doing**, **Blocked**, and **Done**. Cards are created, moved, and updated by the agent as it works — or by you, directly in the UI.
+
+## Telling the agent to plan
+
+The simplest way to see Mission Control in action is to ask. Say something like:
+
+> "Plan a LinkedIn launch week for my new project."
+
+Watch what happens. The agent breaks the request down into specific tasks, creates a card for each one, and places them in the **Todo** column. As it begins executing, it moves the active card to **Doing**. When it finishes, it moves the card to **Done**. If it hits a dependency — something it needs you to do before it can continue — it moves the card to **Blocked** and tells you what it's waiting for.
+
+You're not managing this. The agent is. You can watch it run from the Mission Control panel, interrupt at any point, or pick up a blocked card yourself.
+
+## States and who moves them
+
+Cards have four states:
+
+- **Todo** — work identified but not yet started.
+- **Doing** — the agent is actively working on this right now, or it's the next thing up.
+- **Blocked** — the agent is waiting on something: your input, an external dependency, a resource it can't access.
+- **Done** — complete.
+
+Both you and the agent can move cards. If you finish something the agent was waiting on, drag the card from **Blocked** to **Todo** and tell the agent it can continue. If a card is no longer relevant, you can archive or delete it from the card menu. The agent adapts to changes — it reads the board state at the start of each turn, so it will notice if you've reorganized things.
+
+<Callout type="note">
+Mission Control is per-agent. Each agent's task board is entirely independent. If you have a `linkedin-writer` agent and a `research-agent`, their boards do not share cards. This keeps every agent's context clean and focused on its own work.
+</Callout>
+
+**Next:** [Schedules and workflows](/using-granclaw/schedules-and-workflows)

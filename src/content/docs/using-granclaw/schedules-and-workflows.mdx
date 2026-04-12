@@ -1,0 +1,38 @@
+---
+title: Schedules and workflows
+description: Every weekday at 8am, brief me.
+section: using-granclaw
+tags: [cron, automation]
+backlinks: [agent-superpowers/telegram-integration]
+---
+
+Every weekday at 8am, brief me.
+
+## Scheduling a recurring task
+
+Schedules let you run an agent task on a timer — without you being at the keyboard. You write a cron expression, pair it with a prompt, and GranClaw fires that prompt at the agent on the schedule you set. The agent runs it, writes back to its vault, and sends a message to you on Telegram if you've configured that integration.
+
+To create a schedule, open an agent's settings and go to the **Schedules** tab. Click **Add schedule**. Enter:
+
+- **Cron expression** — the timing. For example, `0 8 * * 1-5` means "every weekday at 8am". Standard five-field cron syntax works here. If you are not sure of the syntax, the UI shows a plain-language preview as you type.
+- **Prompt** — the message to send. Write it exactly as you would type it in the chat window. "Summarize the news from my RSS feeds and post the top three items to my vault" is a valid schedule prompt.
+
+Save it, and the schedule is active immediately. You don't need to restart anything. The next fire time is shown in the schedule list so you know when to expect the first run.
+
+Each schedule run gets its own conversation channel, separate from your regular chat thread. You can open that channel in the dashboard to read the full output of any past run, or tail a current run live. Run history is stored locally alongside the rest of the agent's data.
+
+## Workflows
+
+Workflows are saved sequences of steps that the agent executes in order: agent calls, code blocks, and LLM calls chained together into a reusable pipeline. Where a schedule fires a single prompt on a timer, a workflow defines a structured multi-step process you can run on demand or combine with a schedule.
+
+A simple example: a workflow called `weekly-report` that first asks the agent to pull data from three sources, then runs a code step to merge the results, then asks the LLM to write a formatted summary, then posts it. You define this once and invoke it by name.
+
+To create a workflow, open the **Workflows** tab in agent settings. Each step is configured with a type (agent call, code, or LLM) and its input. Steps can reference the output of previous steps using template variables, so each stage can build on what came before.
+
+## Where they live in the UI
+
+Both schedules and workflows live in the agent settings panel, under their own tabs. The main Schedules view shows a timeline of upcoming and recent runs for all agents on the same page, so you can see at a glance what's queued and what ran.
+
+From the timeline, click any run entry to open its conversation channel and read the full output. This is how you verify that your "every weekday at 8am" brief is actually running, what it produced, and whether it hit any errors — without interrupting your current conversation with the agent.
+
+**Next:** [Usage and costs](/using-granclaw/usage-and-costs)
