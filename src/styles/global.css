@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('/fonts/NotoSerif-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('/fonts/NotoSerif-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('/fonts/NotoSerif-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fef9ef;
+  background-image:
+    linear-gradient(rgba(29, 28, 22, 0.03) 1px, transparent 1px),
+    radial-gradient(circle, rgba(29, 28, 22, 0.02) 1px, transparent 1px);
+  background-size: 100% 28px, 16px 16px;
+  background-attachment: fixed;
+}
+
+::selection {
+  background: #cabeff;
+  color: #1c0062;
+}
+
+.noise-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background-image: url('/paper-fibers.png');
+  opacity: 0.05;
+  z-index: 9999;
+}
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #c9c4d8; }
+
+.callout-shadow {
+  box-shadow: 0 10px 40px rgba(29, 28, 22, 0.06);
+}
+
+.highlight-marker {
+  background: linear-gradient(
+    104deg,
+    rgba(243, 228, 143, 0) 0.9%,
+    rgba(243, 228, 143, 1) 2.4%,
+    rgba(243, 228, 143, 0.5) 5.8%,
+    rgba(243, 228, 143, 0.1) 93%,
+    rgba(243, 228, 143, 0.7) 96%,
+    rgba(243, 228, 143, 0) 98%
+  ),
+  linear-gradient(
+    183deg,
+    rgba(243, 228, 143, 0) 0%,
+    rgba(243, 228, 143, 0.3) 7.9%,
+    rgba(243, 228, 143, 0) 15%
+  );
+  padding: 0.1em 0.3em;
+}
+
+.prose-sanctuary {
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #1d1c16;
+}
+.prose-sanctuary h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+}
+.prose-sanctuary h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 2.5rem 0 1rem;
+}
+.prose-sanctuary h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 2rem 0 0.75rem;
+}
+.prose-sanctuary p { margin: 0 0 1.25rem; }
+.prose-sanctuary ul, .prose-sanctuary ol { margin: 0 0 1.25rem 1.5rem; }
+.prose-sanctuary li { margin: 0.5rem 0; }
+.prose-sanctuary a {
+  color: #5d39e0;
+  text-decoration: underline;
+  text-decoration-color: rgba(93, 57, 224, 0.3);
+  text-underline-offset: 3px;
+}
+.prose-sanctuary a:hover { text-decoration-color: #5d39e0; }
+.prose-sanctuary strong { font-weight: 700; }
+.prose-sanctuary em { font-style: italic; }
+.prose-sanctuary hr {
+  border: 0;
+  height: 2rem;
+  background: transparent;
+}
