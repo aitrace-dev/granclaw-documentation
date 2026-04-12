@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import NoiseOverlay from '../components/NoiseOverlay.astro';
 import SearchPalette from '../components/SearchPalette.astro';
+import TagChip from '../components/TagChip.astro';
 
 export interface Props {
   title: string;
@@ -39,9 +40,7 @@ const toc = headings.filter((h) => h.depth === 2);
       <main class="flex-1 max-w-3xl mx-auto px-12 py-16 pb-32 prose-sanctuary">
         {tags.length > 0 && (
           <div class="flex flex-wrap gap-2 mb-6">
-            {tags.map((t) => (
-              <span class="bg-secondary-fixed-dim text-on-secondary-fixed px-3 py-0.5 rounded-full font-label text-[10px] uppercase tracking-wider">#{t}</span>
-            ))}
+            {tags.map((t) => <TagChip>{t}</TagChip>)}
           </div>
         )}
         <slot />
