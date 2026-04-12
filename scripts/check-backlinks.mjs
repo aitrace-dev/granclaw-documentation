@@ -43,7 +43,18 @@ const slugs = new Set(
 
 let errors = 0;
 for (const file of files) {
-  const fm = frontmatter(fs.readFileSync(file, 'utf8'));
+  const raw = fs.readFileSync(file, 'utf8');
+  const fm = frontmatter(raw);
+
+  // Warn if multi-line YAML array syntax is used — the inline parser won't catch it
+  if (!fm.backlinks) {
+    const fmBlock = raw.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
+    const hasMultiLineBacklinks = /^backlinks:\s*$/m.test(fmBlock) && /^\s+-\s+/m.test(fmBlock);
+    if (hasMultiLineBacklinks) {
+      console.warn(`⚠ ${path.relative(process.cwd(), file)}: backlinks uses multi-line YAML — convert to inline array: backlinks: [slug1, slug2]`);
+    }
+  }
+
   const backlinks = Array.isArray(fm.backlinks) ? fm.backlinks : [];
   for (const b of backlinks) {
     if (!slugs.has(b)) {

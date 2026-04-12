@@ -43,6 +43,11 @@
     results.innerHTML = '';
   }
 
+  // Close when clicking the backdrop (outside the inner panel)
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) close();
+  });
+
   document.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
       e.preventDefault();
@@ -53,6 +58,33 @@
   document.querySelectorAll('[data-search-trigger]').forEach((el) => {
     el.addEventListener('click', open);
   });
+
+  function renderResults(docs: any[]) {
+    results.innerHTML = '';
+    for (const d of docs) {
+      const a = document.createElement('a');
+      try {
+        // Reject javascript: and data: schemes
+        const url = new URL(d.url, location.origin);
+        a.href = url.pathname + url.search + url.hash;
+      } catch {
+        continue;
+      }
+      a.className = 'block px-4 py-3 hover:bg-surface-container rounded';
+
+      const titleEl = document.createElement('div');
+      titleEl.className = 'font-label text-xs uppercase text-on-surface/40';
+      titleEl.textContent = d.meta?.title || d.url;
+
+      const excerptEl = document.createElement('div');
+      excerptEl.className = 'font-body text-sm text-on-surface/80 line-clamp-2';
+      // Pagefind sanitizes its own excerpt HTML (bold highlights only); d.url is kept via textContent above
+      excerptEl.innerHTML = d.excerpt;
+
+      a.append(titleEl, excerptEl);
+      results.append(a);
+    }
+  }
 
   let searchTimer: number | undefined;
   input.addEventListener('input', () => {
@@ -68,12 +100,7 @@
       }
       const search = await pf.search(q);
       const docs = await Promise.all(search.results.slice(0, 8).map((r: any) => r.data()));
-      results.innerHTML = docs.map((d: any) => `
-        <a href="${d.url}" class="block px-4 py-3 hover:bg-surface-container rounded">
-          <div class="font-label text-xs uppercase text-on-surface/40">${d.meta?.title || d.url}</div>
-          <div class="font-body text-sm text-on-surface/80 line-clamp-2">${d.excerpt}</div>
-        </a>
-      `).join('');
+      renderResults(docs);
     }, 120);
   });
 </script>

@@ -1,6 +1,7 @@
 ---
 // src/components/Footer.astro
 import { execSync } from 'node:child_process';
+import fs from 'node:fs';
 import path from 'node:path';
 
 export interface Props {
@@ -11,7 +12,9 @@ const { slug, backlinks } = Astro.props;
 
 function gitLastEdited(slug: string): string {
   try {
-    const file = path.resolve('src/content/docs', `${slug}.md`);
+    const mdx = path.resolve('src/content/docs', `${slug}.mdx`);
+    const md  = path.resolve('src/content/docs', `${slug}.md`);
+    const file = fs.existsSync(mdx) ? mdx : md;
     const stamp = execSync(`git log -1 --format=%cs -- "${file}"`, { encoding: 'utf8' }).trim();
     return stamp || new Date().toISOString().slice(0, 10);
   } catch {

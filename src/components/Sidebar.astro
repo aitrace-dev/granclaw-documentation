@@ -35,7 +35,7 @@ const { activeSlug } = Astro.props;
                   'group flex items-center gap-3 py-1.5 duration-150 ease-in-out pl-4',
                   'hover:bg-surface-container-high',
                   isActive
-                    ? 'text-primary font-bold border-l-2 border-primary'
+                    ? 'text-primary font-bold bg-primary/10'
                     : 'text-on-surface/60',
                 ]}
               >
@@ -74,8 +74,3 @@ const { activeSlug } = Astro.props;
     </button>
   </div>
 </aside>
-
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-/>
