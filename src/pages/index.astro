@@ -1,4 +1,11 @@
 ---
-// Redirect to the first real page.
-return Astro.redirect('/getting-started/introduction');
+// Silently redirect to the first doc page — no visible "Redirecting…" flash.
 ---
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="refresh" content="0;url=/getting-started/introduction" />
+  <script>location.replace('/getting-started/introduction')</script>
+</head>
+<body></body>
+</html>
