@@ -1,0 +1,49 @@
+---
+title: Export & import agents
+description: Move an agent to another machine with one zip.
+section: data-and-privacy
+tags: [backup, migration]
+backlinks: [agent-superpowers/vault-obsidian-memory]
+---
+
+import Callout from '../../../components/Callout.astro';
+
+Move an agent to another machine with one zip.
+
+An agent is not just a configuration entry. It is a vault of markdown notes built over weeks, a database of every conversation it has had, a browser profile with saved logins, and a task board full of in-progress work. GranClaw can pack all of that into a single zip file and restore it anywhere — the same agent, the same memory, the same identity.
+
+## What's in the zip
+
+When you export an agent, GranClaw creates a zip containing everything that makes that agent what it is:
+
+- **Vault** — all of the agent's markdown files: journals, action logs, topic notes, research findings, wikilinks.
+- **Conversation history** — the full database of messages exchanged between you and the agent.
+- **Browser profile** — the agent's Chrome profile directory, including saved cookies, logins, and site preferences.
+- **Agent configuration** — the agent's settings: model, provider, allowed tools, Telegram connection, schedule definitions.
+- **Task board** — every kanban card in its current state, across all columns.
+
+Nothing is left out. The zip is a complete snapshot of the agent at the moment you exported it.
+
+## Exporting
+
+Open the agent's card in the dashboard. The export button is in the agent's settings or the overflow menu on the card — click it and GranClaw builds the zip and your browser downloads it. The process takes a few seconds depending on how large the browser profile and vault are.
+
+Save the zip somewhere safe. It is a backup as much as it is a migration tool. Export before making significant configuration changes. Export before experimenting with new tools. If something goes wrong, you can restore from the zip exactly.
+
+<Callout type="tip">
+Export is also the right answer before wiping an agent. The wipe operation cannot be undone — exporting first means you always have a restore path.
+</Callout>
+
+## Importing
+
+On the target machine, open the GranClaw dashboard and use the Import button — it appears on the agents list page. Drop the zip file into the prompt, confirm, and GranClaw unpacks it. The agent appears in your list within a few seconds.
+
+You don't need to create the agent manually first. The import creates the agent from scratch using the configuration embedded in the zip.
+
+## Same identity after import
+
+The agent that comes online on the new machine is the same agent that was running on the old one. Conversation memory is intact — ask it about something you discussed weeks ago and it will remember. Saved logins in the browser profile are restored — the agent can authenticate to the same sites it could before, without logging in again. Schedules are restored and will fire on their next due time. The task board is exactly as you left it.
+
+Moving to a new machine does not mean starting over. Your agent travels with you.
+
+**Next:** [Local-first philosophy](/data-and-privacy/local-first-philosophy)
