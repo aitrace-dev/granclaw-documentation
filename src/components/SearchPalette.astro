@@ -1,0 +1,79 @@
+---
+// src/components/SearchPalette.astro — ⌘K modal, lazy-loads Pagefind
+---
+<div id="search-modal" class="hidden fixed inset-0 z-[100] items-start justify-center pt-[12vh] bg-on-surface/20 backdrop-blur-sm">
+  <div class="w-full max-w-xl bg-background/95 backdrop-blur-[20px] callout-shadow rounded-lg overflow-hidden">
+    <div class="flex items-center gap-3 px-6 py-4 border-b border-outline-variant/20">
+      <span class="material-symbols-outlined text-on-surface/40">search</span>
+      <input
+        id="search-input"
+        type="text"
+        placeholder="Search the docs…"
+        class="flex-1 bg-transparent outline-none font-body text-lg placeholder:text-on-surface/30"
+      />
+      <kbd class="font-mono text-[10px] text-on-surface/40 uppercase">Esc</kbd>
+    </div>
+    <div id="search-results" class="max-h-[50vh] overflow-y-auto custom-scrollbar p-2"></div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('search-modal')!;
+  const input = document.getElementById('search-input') as HTMLInputElement;
+  const results = document.getElementById('search-results')!;
+  let pagefind: any = null;
+
+  async function ensurePagefind() {
+    if (pagefind) return pagefind;
+    // @ts-ignore - Pagefind is emitted at build time, not available in dev unless built.
+    pagefind = await import(/* @vite-ignore */ '/_pagefind/pagefind.js').catch(() => null);
+    return pagefind;
+  }
+
+  function open() {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    input.focus();
+    ensurePagefind();
+  }
+  function close() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    input.value = '';
+    results.innerHTML = '';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      open();
+    }
+    if (e.key === 'Escape') close();
+  });
+  document.querySelectorAll('[data-search-trigger]').forEach((el) => {
+    el.addEventListener('click', open);
+  });
+
+  let searchTimer: number | undefined;
+  input.addEventListener('input', () => {
+    window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(async () => {
+      const q = input.value.trim();
+      results.innerHTML = '';
+      if (!q) return;
+      const pf = await ensurePagefind();
+      if (!pf) {
+        results.innerHTML = '<div class="px-4 py-3 text-on-surface/50 font-label text-sm">Search available after production build.</div>';
+        return;
+      }
+      const search = await pf.search(q);
+      const docs = await Promise.all(search.results.slice(0, 8).map((r: any) => r.data()));
+      results.innerHTML = docs.map((d: any) => `
+        <a href="${d.url}" class="block px-4 py-3 hover:bg-surface-container rounded">
+          <div class="font-label text-xs uppercase text-on-surface/40">${d.meta?.title || d.url}</div>
+          <div class="font-body text-sm text-on-surface/80 line-clamp-2">${d.excerpt}</div>
+        </a>
+      `).join('');
+    }, 120);
+  });
+</script>
