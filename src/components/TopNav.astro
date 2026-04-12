@@ -1,0 +1,27 @@
+---
+// src/components/TopNav.astro
+import { findSidebarItem } from '../config/sidebar';
+
+export interface Props {
+  slug: string;
+  title: string;
+}
+const { slug, title } = Astro.props;
+const found = findSidebarItem(slug);
+const sectionLabel = found?.section.label ?? 'Docs';
+---
+<header class="flex justify-between items-center px-8 py-3 w-full sticky top-0 bg-background/80 backdrop-blur-md z-40">
+  <div class="flex items-center gap-2 text-on-surface/40 font-mono text-[10px] uppercase">
+    <span>{sectionLabel}</span>
+    <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+    <span class="text-on-surface">{title}</span>
+  </div>
+  <div class="flex items-center gap-3 text-on-surface/40">
+    <button type="button" data-search-trigger class="hover:text-primary cursor-pointer transition-colors" aria-label="Search">
+      <span class="material-symbols-outlined text-sm">search</span>
+    </button>
+    <a href="https://github.com/aitrace-dev/granclaw" class="hover:text-primary cursor-pointer transition-colors" aria-label="GitHub">
+      <span class="material-symbols-outlined text-sm">code</span>
+    </a>
+  </div>
+</header>

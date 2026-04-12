@@ -1,0 +1,40 @@
+---
+// src/components/Footer.astro
+import { execSync } from 'node:child_process';
+import path from 'node:path';
+
+export interface Props {
+  slug: string;
+  backlinks: string[];
+}
+const { slug, backlinks } = Astro.props;
+
+function gitLastEdited(slug: string): string {
+  try {
+    const file = path.resolve('src/content/docs', `${slug}.md`);
+    const stamp = execSync(`git log -1 --format=%cs -- "${file}"`, { encoding: 'utf8' }).trim();
+    return stamp || new Date().toISOString().slice(0, 10);
+  } catch {
+    return new Date().toISOString().slice(0, 10);
+  }
+}
+const edited = gitLastEdited(slug);
+---
+<footer class="fixed bottom-0 right-0 w-[calc(100%-16rem)] bg-background flex justify-between items-center px-10 py-3 z-40">
+  <div class="font-mono text-[10px] uppercase tracking-tighter text-on-surface/50">
+    edited {edited} <span class="mx-2">•</span> granclaw docs
+  </div>
+  {backlinks.length > 0 && (
+    <div class="flex items-center gap-3">
+      <span class="font-mono text-[9px] uppercase text-on-surface/40 mr-2">Related:</span>
+      {backlinks.map((b) => (
+        <a
+          href={`/${b}`}
+          class="bg-primary/5 text-primary px-2 py-0.5 rounded font-label text-[10px] hover:bg-primary/10 transition-colors"
+        >
+          [[{b.split('/').pop()}]]
+        </a>
+      ))}
+    </div>
+  )}
+</footer>
