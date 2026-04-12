@@ -1,0 +1,55 @@
+---
+// src/layouts/DocLayout.astro
+import '../styles/global.css';
+import Sidebar from '../components/Sidebar.astro';
+import TopNav from '../components/TopNav.astro';
+import Footer from '../components/Footer.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import NoiseOverlay from '../components/NoiseOverlay.astro';
+import SearchPalette from '../components/SearchPalette.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  headings: Array<{ depth: number; slug: string; text: string }>;
+  tags?: string[];
+  backlinks?: string[];
+}
+
+const { title, description, slug, headings, tags = [], backlinks = [] } = Astro.props;
+const toc = headings.filter((h) => h.depth === 2);
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{title} — GranClaw Docs</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preload" href="/fonts/NotoSerif-Regular.woff2" as="font" type="font/woff2" crossorigin />
+</head>
+<body class="font-body text-on-surface bg-background min-h-screen">
+  <NoiseOverlay />
+  <Sidebar activeSlug={slug} />
+  <div class="ml-64 flex flex-col min-h-screen">
+    <TopNav slug={slug} title={title} />
+    <div class="flex">
+      <main class="flex-1 max-w-3xl mx-auto px-12 py-16 pb-32 prose-sanctuary">
+        {tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-6">
+            {tags.map((t) => (
+              <span class="bg-secondary-fixed-dim text-on-secondary-fixed px-3 py-0.5 rounded-full font-label text-[10px] uppercase tracking-wider">#{t}</span>
+            ))}
+          </div>
+        )}
+        <slot />
+      </main>
+      {toc.length >= 2 && <TableOfContents headings={toc} />}
+    </div>
+    <Footer slug={slug} backlinks={backlinks} />
+  </div>
+  <SearchPalette />
+</body>
+</html>
