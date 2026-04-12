@@ -1,0 +1,47 @@
+---
+title: Install
+description: In 5 minutes you'll have GranClaw running.
+section: getting-started
+tags: [setup, cli]
+backlinks: [getting-started/first-run, getting-started/configure-llm-provider]
+---
+
+In 5 minutes you'll have GranClaw running.
+
+## What you need
+
+Before you start, make sure you have:
+
+- **Node 20 or higher** — check with `node --version`. If you're on an older version, use [nvm](https://github.com/nvm-sh/nvm) or the official Node installer at [nodejs.org](https://nodejs.org) to upgrade.
+- **macOS or Linux** — Windows support is not yet included in this version.
+- **2 GB free disk space** — for dependencies, agent workspaces, and the databases GranClaw maintains locally for conversation history and session data.
+- **An API key from one LLM provider** — you only need one to get started. GranClaw works with [OpenAI](https://platform.openai.com/api-keys), [Anthropic](https://console.anthropic.com/), [Google Gemini](https://aistudio.google.com/app/apikey), [Groq](https://console.groq.com/keys), or [OpenRouter](https://openrouter.ai/keys). Pick whichever you already have access to.
+
+You don't need a key right now — you can add it after the install. But you'll need one before your first agent can reply.
+
+## Install from source
+
+Clone the repository, install dependencies, and start the development server:
+
+```bash
+git clone https://github.com/aitrace-dev/granclaw.git
+cd granclaw
+npm install
+npm run dev
+```
+
+This starts two processes: the backend API on `http://localhost:3001` and the dashboard UI on `http://localhost:5173`. Both run with hot reload, so changes to your configuration take effect immediately — no restart needed.
+
+Your agent workspaces, databases, and configuration all stay inside the repository directory. Nothing is written to system-wide directories, so you can run multiple GranClaw installs on the same machine without them interfering with each other. When you want to stop, press `Ctrl+C` in the terminal.
+
+## Verify the install
+
+Open `http://localhost:5173` in your browser. You should see the GranClaw dashboard with a sidebar on the left, a panel listing your agents in the center, and a settings icon in the top-right corner.
+
+<Callout type="note">
+If you see a provider error or an empty chat on first load, that's expected. You haven't configured an LLM provider yet. The next page walks you through it.
+</Callout>
+
+If the page doesn't load, check your terminal for errors. The most common cause is a Node version below 20 — run `node --version` to confirm.
+
+**Next:** [First run](/getting-started/first-run)

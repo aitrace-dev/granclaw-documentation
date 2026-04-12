@@ -1,0 +1,41 @@
+---
+title: Configure your LLM provider
+description: Point GranClaw at Claude, OpenAI, Gemini, or a local model.
+section: getting-started
+tags: [providers, settings]
+backlinks: [using-granclaw/create-an-agent, using-granclaw/usage-and-costs]
+---
+
+Point GranClaw at Claude, OpenAI, Gemini, or a local model.
+
+## Where settings live
+
+Open the dashboard at `http://localhost:5173` and click the settings icon in the top-right corner. This takes you to the Settings panel at `/settings`. Provider configuration lives here — you add your API keys once, and each agent can then independently pick which provider and model it uses. You can have multiple providers active at the same time and mix them freely across agents running on the same machine. There's no system-wide default you're forced to use everywhere.
+
+## Supported providers
+
+GranClaw works with the following providers out of the box:
+
+- **Anthropic** — Claude models (Sonnet, Haiku, Opus). API keys at [console.anthropic.com](https://console.anthropic.com/).
+- **OpenAI** — GPT-4o and other OpenAI models. API keys at [platform.openai.com](https://platform.openai.com/api-keys).
+- **Google Gemini** — Gemini Pro and Flash models. API keys at [aistudio.google.com](https://aistudio.google.com/app/apikey).
+- **Groq** — Fast inference for open models. API keys at [console.groq.com](https://console.groq.com/keys).
+- **OpenRouter** — A single key that routes to dozens of models. API keys at [openrouter.ai](https://openrouter.ai/keys).
+
+You only need one provider to get started. Pick whichever you already have a key for.
+
+## Adding an API key
+
+In the Settings panel, click **Add provider**. A dropdown lets you pick a provider from the list above. Select yours, paste your API key into the field, and click **Save**.
+
+Once saved, the provider appears in your active provider list. You'll see it reflected in the agent configuration panel — any agent you create or edit can now select this provider as its model source. If you want to add more than one provider, repeat the process. Each provider entry is stored and managed separately, so you can remove or update a single key without affecting the others.
+
+<Callout type="tip">
+Your API key is stored locally in GranClaw's data directory on your machine. It is never written to a file you'd commit to version control, and it is never sent anywhere except directly to your chosen provider when the agent runs. GranClaw injects it as an environment variable inside the agent process only at the moment a message is sent.
+</Callout>
+
+## Switching providers
+
+You can swap the provider for any agent at any time from the agent's settings — no restart required. The change takes effect on the next message you send.
+
+**Next:** [Create an agent](/using-granclaw/create-an-agent)
