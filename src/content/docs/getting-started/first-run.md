@@ -10,6 +10,8 @@ backlinks: [using-granclaw/chat, getting-started/configure-llm-provider]
 
 Go to [http://localhost:5173](http://localhost:5173). You'll see one agent card: `main-agent`.
 
+![GranClaw dashboard showing agent cards](/images/dashboard-overview.png)
+
 ## Send a message
 
 Click the `main-agent` card, type anything in the input at the bottom, and press Enter. The reply streams in as it's generated.
