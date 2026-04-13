@@ -134,6 +134,30 @@ body {
 .prose-sanctuary a:hover { text-decoration-color: #5d39e0; }
 .prose-sanctuary strong { font-weight: 700; }
 .prose-sanctuary em { font-style: italic; }
+.prose-sanctuary table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+}
+.prose-sanctuary thead th {
+  background: rgba(29, 28, 22, 0.06);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.6rem 1rem;
+  text-align: left;
+  color: rgba(29, 28, 22, 0.6);
+}
+.prose-sanctuary tbody td {
+  padding: 0.65rem 1rem;
+  vertical-align: top;
+}
+.prose-sanctuary tbody tr:nth-child(even) td {
+  background: rgba(29, 28, 22, 0.025);
+}
 .prose-sanctuary hr {
   border: 0;
   height: 2rem;
